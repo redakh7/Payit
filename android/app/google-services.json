@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "571862210681",
+    "project_id": "mwallethps",
+    "storage_bucket": "mwallethps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571862210681:android:d52031f16c703f5c391ca8",
+        "android_client_info": {
+          "package_name": "com.example.m_wallet_hps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571862210681-oh71lu7dvtg41pbpufpu7esh1dbbg44a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8CzGynBJnHf9G82tlydIFnFcZjM6-SEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571862210681-oh71lu7dvtg41pbpufpu7esh1dbbg44a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
