@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_wallet_hps/cubit/app_cubit.dart';
@@ -21,10 +22,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if(state is AppLoginSuccessStates)
             {
               if(AppCubit.get(context).userModel.status !=null){
+                String? token = await FirebaseMessaging.instance.getToken();
+                AppCubit.get(context).addTokenToUser(AppCubit.get(context).userModel.data.email, token);
             showToast(message: state.userModel.message);
           navigateAndFinish(context, HomePage());
               }
@@ -32,6 +35,10 @@ class _LoginPageState extends State<LoginPage> {
           else  if(state is AppLoginErrorStates) {
             showToast(message: state.error);
           }
+
+
+
+
         },
         builder: (context, state) => Scaffold(
               body: Center(

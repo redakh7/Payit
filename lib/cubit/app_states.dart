@@ -32,3 +32,7 @@ class AppSigninErrorStates extends AppStates {
   final String error;
   AppSigninErrorStates(this.error);
 }
+class LoginSaveTokenInitialStates extends AppStates {}
+class LoginSaveTokenErrorStates extends AppStates {}
+class LoginSaveTokenSuccessStates extends AppStates {}
+

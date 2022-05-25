@@ -41,6 +41,8 @@ class AppCubit extends Cubit<AppStates>{
       print(value.data);
       userModel = UserModel.fromJson(value.data);
       emit(AppLoginSuccessStates(userModel));
+      emit(LoginSaveTokenInitialStates());
+
     }).catchError((error) {
       print(error.toString());
       emit(AppLoginErrorStates("Login Failed"));
@@ -68,8 +70,21 @@ class AppCubit extends Cubit<AppStates>{
       emit(AppSigninErrorStates(error.toString()));
     });
   }
-
-
-
+  void addTokenToUser(email,deviceToken){
+    emit(LoginSaveTokenInitialStates());
+    DioHelper.postDataLogins(url: "registration/fcm_token", data: {
+      "user_email" : email,
+      "device_token" : deviceToken
+    }).then((value) => {
+      print(value.data),
+      emit(LoginSaveTokenSuccessStates()),
+    }).catchError((error){
+      emit(LoginSaveTokenErrorStates());
+      print(error.toString());
+    });
+  }
 
 }
+
+
+

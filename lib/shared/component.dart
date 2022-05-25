@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -23,3 +24,9 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
   ),
       (route) => false,
 );
+
+
+Future<String?> getToken() async {
+  String? token = await FirebaseMessaging.instance.getToken();
+  return token;
+}
