@@ -8,6 +8,7 @@ Widget defaultHomeButton(
         required AssetImage buttonImage,
         required VoidCallback function}) =>
     InkWell(
+
       borderRadius: const BorderRadius.all(Radius.circular(25.0)),
       onTap: function,
       child: Ink(
@@ -40,3 +41,25 @@ Widget defaultHomeButton(
     );
 
 
+Widget loginButton(
+{
+  required String buttonText,
+  required function,
+}
+    )=>MaterialButton(
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+  ),
+
+  onPressed: function,
+  child:  Center(
+      child: Text(
+        buttonText,
+        style:const  TextStyle(
+          color: Colors.white,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.bold,
+          fontSize: 12.0,
+        ),
+      )),
+);

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.m_wallet_hps">
    <application
-        android:label="m_wallet_hps"
+        android:label="Payit"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

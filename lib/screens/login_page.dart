@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_wallet_hps/cubit/app_cubit.dart';
 import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/screens/home_page.dart';
+import 'package:m_wallet_hps/shared/buttons.dart';
 import 'package:m_wallet_hps/shared/component.dart';
 
 class LoginPage extends StatefulWidget {
@@ -43,27 +44,19 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         Stack(
                           children: <Widget>[
-                            Container(
-                              padding:
-                                  const EdgeInsets.fromLTRB(15.0, 130.0, 0.0, 0.0),
-                              child: const Text(
-                                'wallet',
-                                style: TextStyle(
-                                    fontSize: 80.0, fontWeight: FontWeight.bold),
-                              ),
-                            ),
+
                             Container(
                               padding:
                                   const EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0),
                               child: const Text(
-                                'Manager',
+                                'Payit',
                                 style: TextStyle(
                                     fontSize: 70.0, fontWeight: FontWeight.bold),
                               ),
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.fromLTRB(290, 195.0, 0.0, 0.0),
+                                  const EdgeInsets.fromLTRB(180, 195.0, 0, 0.0),
                               child: const Text(
                                 '.',
                                 style: TextStyle(
@@ -147,29 +140,18 @@ class _LoginPageState extends State<LoginPage> {
                                     shadowColor: Colors.greenAccent,
                                     color: Colors.green,
                                     elevation: 7.0,
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Center(
-                                        child: TextButton(
-                                          onPressed: (){
-                                            if (_formKey.currentState!.validate()) {
-                                              print(emailLoginController.text);
-                                              print(passwordLogController.text);
-                                              AppCubit.get(context).userLogin(
-                                                  email: emailLoginController.text,
-                                                  password: passwordLogController.text);
-                                            }
+                                    child: Center(
+                                      child: loginButton(buttonText: "Login",
+                                          function: (){
+                                    if (_formKey.currentState!.validate()) {
+                                    print(emailLoginController.text);
+                                    print(passwordLogController.text);
+                                    AppCubit.get(context).userLogin(
+                                    email: emailLoginController.text,
+                                    password: passwordLogController.text);
+                                    }
 
-                                          },
-                                          child: const Text(
-                                            'LOGIN',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Montserrat'),
-                                          ),
-                                        ),
-                                      ),
+                                    },)
                                     ),
                                   ),
                                 ),

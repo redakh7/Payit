@@ -44,6 +44,8 @@ dependencies:
   firebase_messaging: ^11.4.0
   flutter_slider_drawer: ^2.1.1
   drawerbehavior: ^2.2.2
+  flutterfire_cli: ^0.2.2+2
+  firebase_core: ^1.17.0
 
 dev_dependencies:
   flutter_test:
@@ -74,8 +76,7 @@ flutter:
     - images/transferrrt.png
     - images/mastercard.png
     - images/wallet.png
-    - images/hps.jpg
-
+    - images/logout.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

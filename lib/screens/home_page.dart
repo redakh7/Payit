@@ -34,12 +34,6 @@ class HomePage extends StatelessWidget {
                   ),
 
 
-                  /// Likes
-                  SalomonBottomBarItem(
-                    icon: Icon(Icons.favorite_border),
-                    title: Text("Likes"),
-                    selectedColor: Colors.pink,
-                  ),
 
                   /// Search
                   SalomonBottomBarItem(

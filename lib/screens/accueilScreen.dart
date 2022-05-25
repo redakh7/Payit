@@ -1,6 +1,7 @@
 
 
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_wallet_hps/cubit/app_cubit.dart';
@@ -8,7 +9,7 @@ import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/shared/buttons.dart';
 
 class AccueilScreen extends StatelessWidget {
-  const AccueilScreen({Key? key}) : super(key: key);
+   AccueilScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +88,9 @@ class AccueilScreen extends StatelessWidget {
                               buttonText: "Payment",
                               buttonImage:
                               const AssetImage("images/paiment.png"),
-                              function: () {
-                                print("hellopayment");
+                              function: () async {
+                                String? token = await FirebaseMessaging.instance.getToken();
+                                print(token);
                               }),
                           const  SizedBox(height: 20.0),
                           defaultHomeButton(

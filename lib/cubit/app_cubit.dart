@@ -16,8 +16,7 @@ class AppCubit extends Cubit<AppStates>{
 
   int currentIndex = 0;
   List<Widget> bottomScreens = [
-   const AccueilScreen(),
-   const TransferPage(),
+    AccueilScreen(),
    const SettingsPage(),
    const UserPage(),
   ];
