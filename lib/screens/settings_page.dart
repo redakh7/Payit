@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class SettingsPage extends StatelessWidget {
+  static String id = "SettingScreen";
   const SettingsPage({Key? key}) : super(key: key);
 
   @override

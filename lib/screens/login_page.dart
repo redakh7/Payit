@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_wallet_hps/cubit/app_cubit.dart';
 import 'package:m_wallet_hps/cubit/app_states.dart';
+import 'package:m_wallet_hps/network/local/cache_helper.dart';
 import 'package:m_wallet_hps/screens/home_page.dart';
 import 'package:m_wallet_hps/shared/buttons.dart';
 import 'package:m_wallet_hps/shared/component.dart';
 
 class LoginPage extends StatefulWidget {
+  static String id = "LoginScreen";
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -25,12 +27,14 @@ class _LoginPageState extends State<LoginPage> {
         listener: (context, state) async {
           if(state is AppLoginSuccessStates)
             {
-              if(AppCubit.get(context).userModel.status !=null){
-                String? token = await FirebaseMessaging.instance.getToken();
-                AppCubit.get(context).addTokenToUser(AppCubit.get(context).userModel.data.email, token);
-            showToast(message: state.userModel.message);
-          navigateAndFinish(context, HomePage());
-              }
+              String? token = await FirebaseMessaging.instance.getToken();
+              AppCubit.get(context).addTokenToUser(AppCubit.get(context).userModel?.data.email, token);
+              CacheHelper.saveData(
+                  key: 'token', value: state.userModel.token);
+              CacheHelper.saveData(key: 'email', value: state.userModel.data.email);
+
+          showToast(message: state.userModel.message);
+        navigateAndFinish(context, HomePage());
             }
           else  if(state is AppLoginErrorStates) {
             showToast(message: state.error);

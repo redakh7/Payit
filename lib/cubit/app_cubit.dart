@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/models/userModel.dart';
+import 'package:m_wallet_hps/network/local/cache_helper.dart';
 import 'package:m_wallet_hps/network/remote/dio_helper.dart';
 import 'package:m_wallet_hps/screens/accueilScreen.dart';
 import 'package:m_wallet_hps/screens/settings_page.dart';
@@ -27,7 +29,7 @@ class AppCubit extends Cubit<AppStates>{
     emit(AppChangeBottomNavStates());
   }
 
-  late UserModel userModel;
+   UserModel? userModel;
   void userLogin({required String email, required String password}) {
     emit(AppLoginInitialStates());
     DioHelper.postDataLogins(
@@ -40,7 +42,7 @@ class AppCubit extends Cubit<AppStates>{
       print('here');
       print(value.data);
       userModel = UserModel.fromJson(value.data);
-      emit(AppLoginSuccessStates(userModel));
+      emit(AppLoginSuccessStates(userModel!));
       emit(LoginSaveTokenInitialStates());
 
     }).catchError((error) {
@@ -49,7 +51,8 @@ class AppCubit extends Cubit<AppStates>{
     });
   }
 
-  late UserModel signupUser;
+
+
   void userSignUp({required String email, required String password,required String firstName,required String lastName}) {
   emit(AppSigninInitialStates());
     DioHelper.postData(
@@ -84,7 +87,43 @@ class AppCubit extends Cubit<AppStates>{
     });
   }
 
+  void loadLoggedInUser(email){
+    if(email != null ){
+      emit(LoadLoggedInUserInitial());
+
+      DioHelper.getData(url: "registration/user?email=$email").then((value)
+      {
+
+
+        userModel = UserModel.fromJson(value.data);
+        print(userModel?.data.firstName);
+        emit(LoadLoggedInUserSuccess());
+      }).catchError((error){
+        emit(LoadLoggedInUserError());
+        print(error.toString());
+      });
+    }
+  }
+
+
+
+
+
+
 }
 
+bool jwtVerification(String token){
 
+  DateTime? expiryDate = Jwt.getExpiryDate(token);
+  print(expiryDate);
+  DateTime now =  DateTime.now();
+  if(expiryDate!.compareTo(now) < 0)
+  {
+    return false;
+  }
+  else {
+
+    return true;
+  }
+}
 

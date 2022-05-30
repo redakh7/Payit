@@ -9,6 +9,7 @@ import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/shared/buttons.dart';
 
 class AccueilScreen extends StatelessWidget {
+  static String id = "AccueilScreen";
    AccueilScreen({Key? key}) : super(key: key);
 
   @override

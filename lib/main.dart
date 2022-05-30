@@ -15,53 +15,67 @@ import 'package:m_wallet_hps/screens/signup_page.dart';
 import 'package:m_wallet_hps/screens/transfer_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'network/local/cache_helper.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-DioHelper.init();
-Firebase.initializeApp();
+  await CacheHelper.init();
+  DioHelper.init();
+  Firebase.initializeApp();
+  String? token;
+  Widget widget;
+  try {
+    token = CacheHelper.getData(key: 'token');
+  } catch (e) {
+    print(e);
+  }
+  print('token is ');
+  print(token);
+
+  if (token == null) {
+    widget = const LoginPage();
+  } else if (jwtVerification(token) == true) {
+    print(jwtVerification(token));
+    widget = const HomePage();
+  } else {
+    widget = const LoginPage();
+  }
 
   BlocOverrides.runZoned(
     () {
-      runApp(const MyApp());
+      runApp(MyApp(
+        startWidget: widget,
+      ));
     },
     blocObserver: MyBlocObserver(),
   );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({required this.startWidget});
+  final Widget startWidget;
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return   MultiBlocProvider(
+
+    return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => AppCubit()),
+          BlocProvider(create: (context) => AppCubit()..loadLoggedInUser(CacheHelper.getData(key: 'email'))),
         ],
         child: BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) => MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
-            initialRoute: '/home',
+            home: startWidget,
             routes: {
-              '/signup': (context) => SignupPage(),
-              '/login': (context) => const LoginPage(),
-              '/home': (context) => const HomePage(),
-              '/transfert': (context) => const TransferPage(),
-              '/accueil': (context) =>  AccueilScreen(),
+              SignupPage.id: (context) => SignupPage(),
+              LoginPage.id: (context) => const LoginPage(),
+              HomePage.id: (context) => const HomePage(),
+              TransferPage.id: (context) => const TransferPage(),
+              AccueilScreen.id: (context) => AccueilScreen(),
             },
-            home: const HomePage(),
           ),
         ));
   }
 }
-/*
-
- */

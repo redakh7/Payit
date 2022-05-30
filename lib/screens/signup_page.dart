@@ -7,6 +7,8 @@ import 'package:m_wallet_hps/shared/buttons.dart';
 import 'package:m_wallet_hps/shared/component.dart';
 
 class SignupPage extends StatelessWidget {
+  static String id = "SignupScreen";
+
   final _formkey = GlobalKey<FormState>();
   var passwordController = TextEditingController();
   var emailController = TextEditingController();

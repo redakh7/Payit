@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class TransferPage extends StatelessWidget {
+  static String id = "TransferScreen";
   const TransferPage({Key? key}) : super(key: key);
 
   @override
