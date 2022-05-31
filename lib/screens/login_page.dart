@@ -5,6 +5,7 @@ import 'package:m_wallet_hps/cubit/app_cubit.dart';
 import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/network/local/cache_helper.dart';
 import 'package:m_wallet_hps/screens/home_page.dart';
+import 'package:m_wallet_hps/screens/signup_page.dart';
 import 'package:m_wallet_hps/shared/buttons.dart';
 import 'package:m_wallet_hps/shared/component.dart';
 
@@ -209,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(width: 5.0),
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamed('/signup');
+                                navigateAndFinish(context, SignupPage());
                               },
                               child: const Text(
                                 'Register',
