@@ -53,8 +53,12 @@ class AppCubit extends Cubit<AppStates>{
 
 
 
-  void userSignUp({required String email, required String password,required String firstName,required String lastName}) {
+  void userSignUp({
+    required String swift,
+    required String email, required String password,
+    required String firstName,required String lastName}) {
   emit(AppSigninInitialStates());
+  print(swift);
     DioHelper.postData(
       url: "registration",
       data: {

@@ -29,6 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  animated_custom_dropdown: 1.2.2
+  dropdown_plus: 0.0.9
+  google_fonts: ^2.3.1
 
 
   # The following adds the Cupertino Icons font to your application.

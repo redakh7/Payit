@@ -5,20 +5,45 @@ import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/screens/login_page.dart';
 import 'package:m_wallet_hps/shared/buttons.dart';
 import 'package:m_wallet_hps/shared/component.dart';
+import 'package:dropdown_plus/dropdown_plus.dart';
 
-class SignupPage extends StatelessWidget {
+
+
+
+
+class SignupPage extends StatefulWidget {
   static String id = "SignupScreen";
 
-  final _formkey = GlobalKey<FormState>();
-  var passwordController = TextEditingController();
-  var emailController = TextEditingController();
-  var firstnameController = TextEditingController();
-  var lastnameController = TextEditingController();
 
   SignupPage({Key? key}) : super(key: key);
 
   @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+
+
+
+  final jobRoleCtrl = TextEditingController();
+
+  final _formkey = GlobalKey<FormState>();
+ var swiftController = DropdownEditingController<String>();
+
+  var passwordController = TextEditingController();
+
+  var emailController = TextEditingController();
+
+  var firstnameController = TextEditingController();
+
+  var lastnameController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    String dropdownvalue = 'Item 1';
+
+// List of items in our dropdown menu
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
         if (state is AppSigninSuccessStates) {
@@ -30,12 +55,12 @@ class SignupPage extends StatelessWidget {
       },
       builder: (context, state) => Scaffold(
         body: SingleChildScrollView(
-          
+
           child: Form(
             key: _formkey,
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-                    Widget>[
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+                Widget>[
               Container(
                 child: Stack(
                   children: <Widget>[
@@ -136,6 +161,61 @@ class SignupPage extends StatelessWidget {
                       const SizedBox(
                         height: 40.0,
                       ),
+                      TextDropdownFormField(
+                        controller: swiftController,
+                        options: ["cih", "attijariwafa bank","sgma"],
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(Icons.arrow_drop_down),
+                            labelText: "BANK")
+                        ,
+                        dropdownHeight: 120,
+                      ),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
+                     /* CustomDropdown(
+                      hintText: 'Select job role',
+                      items: const ['Developer', 'Designer', 'Consultant', 'Student'],
+                       controller: jobRoleCtrl,
+                         ),*/
+                   /* oubada
+                      TextDropdownFormField(
+                        options: ["Male", "Female"],
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(Icons.arrow_drop_down),
+                            labelText: "Gender"),
+                        dropdownHeight: 120,
+                      ),
+
+                oubadaaaaaaaaa
+                  */
+
+                    /*  DropdownButton(
+
+                        // Initial Value
+                        value: dropdownvalue,
+
+                        // Down Arrow Icon
+                        icon: const Icon(Icons.keyboard_arrow_down),
+
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),*/
+
                       Container(
 
                         decoration: BoxDecoration(
@@ -146,35 +226,38 @@ class SignupPage extends StatelessWidget {
                             () {
                           if (_formkey.currentState!.validate()) {
                             AppCubit.get(context).userSignUp(
+                              swift: swiftController.value!,
                                 email: emailController.text,
                                 password: passwordController.text,
                                 firstName: firstnameController.text,
                                 lastName: lastnameController.text);
+
+
                           }
                         },),
-                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        const Text(
-                          'Already Have account? ',
-                          style: TextStyle(fontFamily: 'Montserrat'),
-                        ),
-                        const SizedBox(width: 5.0),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/login');
-                          },
-                          child: const Text(
-                            'Sign in',
-                            style: TextStyle(
-                                color: Colors.green,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
+                          const Text(
+                            'Already Have account? ',
+                            style: TextStyle(fontFamily: 'Montserrat'),
                           ),
-                        )
-                      ],)
+                          const SizedBox(width: 5.0),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed('/login');
+                            },
+                            child: const Text(
+                              'Sign in',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline),
+                            ),
+                          )
+                        ],)
 
                     ],
                   )),
