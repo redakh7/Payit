@@ -45,7 +45,7 @@ class Data {
   late final String email;
   late final String firstName;
   late final String lastName;
-  late final String fcmToken;
+  String? fcmToken;
   late final String appUserRole;
   late final bool locked;
   late final bool enabled;

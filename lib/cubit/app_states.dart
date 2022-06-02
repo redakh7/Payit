@@ -26,7 +26,11 @@ class AppSigninLoadingStates extends AppStates {}
 
 class AppSigninInitialStates extends AppStates {}
 
-class AppSigninSuccessStates extends AppStates {}
+class AppSigninSuccessStates extends AppStates {
+ final String swift;
+
+  AppSigninSuccessStates(this.swift);
+}
 
 class AppSigninErrorStates extends AppStates {
   final String error;

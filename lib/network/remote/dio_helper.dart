@@ -4,7 +4,7 @@ class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'http://3.217.215.70:8081/hps-login/',
+      baseUrl: 'http://3.217.215.70:8081/HPS-SWITCH/',
       receiveDataWhenStatusError: true,
     ));
   }
@@ -28,7 +28,7 @@ class DioHelper {
     required Map<String, dynamic> data,
   }) async {
     dio.options.headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     };
     return dio.post(
       url,

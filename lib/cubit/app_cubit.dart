@@ -30,10 +30,11 @@ class AppCubit extends Cubit<AppStates>{
   }
 
    UserModel? userModel;
-  void userLogin({required String email, required String password}) {
+  void userLogin({required String email, required String password,required String swift}) {
+
     emit(AppLoginInitialStates());
     DioHelper.postDataLogins(
-      url: "login",
+      url: "login?swift=$swift",
       data: {
         'email': email,
         'password': password,
@@ -60,7 +61,7 @@ class AppCubit extends Cubit<AppStates>{
   emit(AppSigninInitialStates());
   print(swift);
     DioHelper.postData(
-      url: "registration",
+      url: "registration?swift=$swift",
       data: {
         'email': email,
         'password': password,
@@ -69,7 +70,7 @@ class AppCubit extends Cubit<AppStates>{
       },
     ).then((value) {
 
-      emit(AppSigninSuccessStates());
+      emit(AppSigninSuccessStates(swift));
       print(value.data);
 
     }).catchError((error) {

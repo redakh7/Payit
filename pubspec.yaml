@@ -50,6 +50,12 @@ dependencies:
   flutterfire_cli: ^0.2.2+2
   firebase_core: ^1.17.0
   jwt_decode: ^0.3.1
+  flutter_easyloading: ^3.0.5
+  easy_loading_button: ^0.2.4
+  flutter_native_splash: ^2.1.6
+flutter_native_splash:
+  #color: "#42a5f5"#
+  background_image: "images/payit"
 
 dev_dependencies:
   flutter_test:

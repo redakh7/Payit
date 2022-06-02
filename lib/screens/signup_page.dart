@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_wallet_hps/cubit/app_cubit.dart';
 import 'package:m_wallet_hps/cubit/app_states.dart';
+import 'package:m_wallet_hps/network/local/cache_helper.dart';
 import 'package:m_wallet_hps/screens/login_page.dart';
 import 'package:m_wallet_hps/shared/buttons.dart';
 import 'package:m_wallet_hps/shared/component.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:easy_loading_button/easy_loading_button.dart';
 
 
 
@@ -40,6 +43,26 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    onButtonPressed() async {
+      if (_formkey.currentState!.validate()) {
+       //await Future.delayed(const Duration(milliseconds: 300), () => 422);
+
+        AppCubit.get(context).userSignUp(
+            swift: swiftController.value!,
+            email: emailController.text,
+            password: passwordController.text,
+            firstName: firstnameController.text,
+            lastName: lastnameController.text);
+        await Future.delayed(Duration(milliseconds: 3000), () => 422);
+
+      }
+
+
+      // After [onPressed], it will trigger animation running backwards, from end to beginning
+      return () {
+             };
+    }
+    builder: EasyLoading.init();
     String dropdownvalue = 'Item 1';
 
 // List of items in our dropdown menu
@@ -48,12 +71,14 @@ class _SignupPageState extends State<SignupPage> {
       listener: (context, state) {
         if (state is AppSigninSuccessStates) {
           showToast(message: "registrated");
+          CacheHelper.saveData(key: 'swift', value: state.swift);
           navigateAndFinish(context, const LoginPage());
         } else if (state is AppLoginErrorStates) {
           showToast(message: state.error);
         }
       },
       builder: (context, state) => Scaffold(
+
         body: SingleChildScrollView(
 
           child: Form(
@@ -163,7 +188,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       TextDropdownFormField(
                         controller: swiftController,
-                        options: ["cih", "attijariwafa bank","sgma"],
+                        options: ["cih", "attijari","sgma"],
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             suffixIcon: Icon(Icons.arrow_drop_down),
@@ -174,49 +199,33 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(
                         height: 40.0,
                       ),
-                     /* CustomDropdown(
-                      hintText: 'Select job role',
-                      items: const ['Developer', 'Designer', 'Consultant', 'Student'],
-                       controller: jobRoleCtrl,
-                         ),*/
-                   /* oubada
-                      TextDropdownFormField(
-                        options: ["Male", "Female"],
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            suffixIcon: Icon(Icons.arrow_drop_down),
-                            labelText: "Gender"),
-                        dropdownHeight: 120,
-                      ),
-
-                oubadaaaaaaaaa
-                  */
-
-                    /*  DropdownButton(
-
-                        // Initial Value
-                        value: dropdownvalue,
-
-                        // Down Arrow Icon
-                        icon: const Icon(Icons.keyboard_arrow_down),
-
-                        // Array list of items
-                        items: items.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownvalue = newValue!;
-                          });
-                        },
-                      ),*/
-
                       Container(
+
+
+                        child: EasyButton(
+                          type: EasyButtonType.outlined,
+                          idleStateWidget: const Text(
+                            'Register',
+                            style: TextStyle(
+                              color: Colors.black54,
+                            )
+                            ,
+                          ) ,
+                          loadingStateWidget: const CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.green,
+                            ),
+                          ) ,
+                          useWidthAnimation: true,
+                          width: 150.0,
+                          height: 40.0,
+                          borderRadius: 14.0,
+                          contentGap: 6.0,
+                          onPressed: onButtonPressed,
+                        ),
+                      ),
+                      /*Container(
 
                         decoration: BoxDecoration(
                           color: Colors.green,
@@ -234,8 +243,9 @@ class _SignupPageState extends State<SignupPage> {
 
 
                           }
-                        },),
-                      ),
+                        },)
+                          ,
+                      ),*/
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

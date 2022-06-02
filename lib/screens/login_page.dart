@@ -159,6 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                                     print(emailLoginController.text);
                                     print(passwordLogController.text);
                                     AppCubit.get(context).userLogin(
+                                      swift: CacheHelper.getData(key: 'swift'),
                                     email: emailLoginController.text,
                                     password: passwordLogController.text);
                                     }
