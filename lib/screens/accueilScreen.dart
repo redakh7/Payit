@@ -17,6 +17,7 @@ class AccueilScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
         listener: ((context, state) {}),
         builder: ((context, state) => Material(
+          color: Colors.transparent,
           child: SafeArea(
             child: SingleChildScrollView(
               child: Column(

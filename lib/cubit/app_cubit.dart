@@ -22,8 +22,12 @@ class AppCubit extends Cubit<AppStates>{
    const SettingsPage(),
    const UserPage(),
   ];
-
-
+static List<String> banks = <String>['cih', 'attijari','sgma'];
+String element = banks.first;
+void changeBank(newvalue){
+element = newvalue;
+  emit(AppChangeBottomNavStates());
+}
   void changeBottom(index) {
     currentIndex = index;
     emit(AppChangeBottomNavStates());
@@ -31,7 +35,7 @@ class AppCubit extends Cubit<AppStates>{
 
    UserModel? userModel;
   void userLogin({required String email, required String password,required String swift}) {
-
+print(swift);
     emit(AppLoginInitialStates());
     DioHelper.postDataLogins(
       url: "login?swift=$swift",
@@ -80,9 +84,10 @@ class AppCubit extends Cubit<AppStates>{
   }
   void addTokenToUser(email,deviceToken,swift){
     emit(LoginSaveTokenInitialStates());
-    DioHelper.postDataLogins(url: "fcm_token?", data: {
-      "user_email" : email,
-      "device_token" : deviceToken
+
+    DioHelper.postDataLogins(url: "fcm_token?swift=$swift", data: {
+      "email" : email,
+      "fcmToken" : deviceToken
     }).then((value) => {
       print(value.data),
       emit(LoginSaveTokenSuccessStates()),
@@ -95,8 +100,8 @@ class AppCubit extends Cubit<AppStates>{
   void loadLoggedInUser(email,swift){
     if(email != null ){
       emit(LoadLoggedInUserInitial());
-
-      DioHelper.getData(url: "HPS-SWITCH/user?swift=$swift&email=$email").then((value)
+print(swift);
+      DioHelper.getData(url: "user?swift=$swift&email=$email").then((value)
       {
         userModel = UserModel.fromJson(value.data);
         print(userModel?.data.firstName);
