@@ -7,6 +7,8 @@ class TransferPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(child: Container(),);
+    return Material(child: Container(
+      color: Colors.transparent,
+    ),);
   }
 }

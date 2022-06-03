@@ -34,44 +34,52 @@ class HomePage extends StatelessWidget {
 
 
 
-  Widget builderWidget(context)=>Scaffold(
-
-    appBar: AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      title: Text(
-        "Hello${AppCubit. get (context).userModel?.data.firstName.toUpperCase()}!",
-        style: TextStyle(color: Colors.black),
+  Widget builderWidget(context)=>Container(
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage('images/body_background.png'),
+        fit: BoxFit.cover,
       ),
     ),
-    body: AppCubit.get(context)
-        .bottomScreens[AppCubit.get(context).currentIndex],
-    bottomNavigationBar: SalomonBottomBar(
-      currentIndex: AppCubit.get(context).currentIndex,
-      onTap: (index) {
-        AppCubit.get(context).changeBottom(index);
-      },
-      items: [
-        SalomonBottomBarItem(
-          icon: Icon(Icons.home),
-          title: Text("Home"),
-          selectedColor: Colors.purple,
+    child: Scaffold(
+    backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          "Hello ${AppCubit. get (context).userModel?.data.firstName.toUpperCase()}!",
+          style: TextStyle(color: Colors.black),
         ),
+      ),
+      body: AppCubit.get(context)
+          .bottomScreens[AppCubit.get(context).currentIndex],
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: AppCubit.get(context).currentIndex,
+        onTap: (index) {
+          AppCubit.get(context).changeBottom(index);
+        },
+        items: [
+          SalomonBottomBarItem(
+            icon: Icon(Icons.home),
+            title: Text("Home"),
+            selectedColor: Colors.purple,
+          ),
 
-        /// Search
-        SalomonBottomBarItem(
-          icon: Icon(Icons.search),
-          title: Text("Search"),
-          selectedColor: Colors.orange,
-        ),
+          /// Search
+          SalomonBottomBarItem(
+            icon: Icon(Icons.search),
+            title: Text("Search"),
+            selectedColor: Colors.orange,
+          ),
 
-        /// Profile
-        SalomonBottomBarItem(
-          icon: Icon(Icons.person),
-          title: Text("Profile"),
-          selectedColor: Colors.teal,
-        ),
-      ],
+          /// Profile
+          SalomonBottomBarItem(
+            icon: Icon(Icons.person),
+            title: Text("Profile"),
+            selectedColor: Colors.teal,
+          ),
+        ],
+      ),
     ),
   );
 }

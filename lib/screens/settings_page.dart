@@ -8,8 +8,10 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-
-      child: Container(),
+color: Colors.transparent,
+      child: Container(
+color: Colors.transparent,
+      ),
     );
   }
 }

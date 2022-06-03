@@ -97,8 +97,8 @@ flutter:
     - images/mastercard.png
     - images/wallet.png
     - images/logout.png
-    - images/body_background.png
     - images/logo.png
+    - images/body_background.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
