@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => AppCubit()..loadLoggedInUser(CacheHelper.getData(key: 'email'))),
+          BlocProvider(create: (context) => AppCubit()..loadLoggedInUser(CacheHelper.getData(key: 'email'),CacheHelper.getData(key: 'swift'))),
         ],
         child: BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},

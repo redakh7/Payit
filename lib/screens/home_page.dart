@@ -35,6 +35,7 @@ class HomePage extends StatelessWidget {
 
 
   Widget builderWidget(context)=>Scaffold(
+
     appBar: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,

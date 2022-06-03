@@ -78,9 +78,9 @@ class AppCubit extends Cubit<AppStates>{
       emit(AppSigninErrorStates(error.toString()));
     });
   }
-  void addTokenToUser(email,deviceToken){
+  void addTokenToUser(email,deviceToken,swift){
     emit(LoginSaveTokenInitialStates());
-    DioHelper.postDataLogins(url: "registration/fcm_token", data: {
+    DioHelper.postDataLogins(url: "fcm_token?", data: {
       "user_email" : email,
       "device_token" : deviceToken
     }).then((value) => {
@@ -92,14 +92,12 @@ class AppCubit extends Cubit<AppStates>{
     });
   }
 
-  void loadLoggedInUser(email){
+  void loadLoggedInUser(email,swift){
     if(email != null ){
       emit(LoadLoggedInUserInitial());
 
-      DioHelper.getData(url: "registration/user?email=$email").then((value)
+      DioHelper.getData(url: "HPS-SWITCH/user?swift=$swift&email=$email").then((value)
       {
-
-
         userModel = UserModel.fromJson(value.data);
         print(userModel?.data.firstName);
         emit(LoadLoggedInUserSuccess());
