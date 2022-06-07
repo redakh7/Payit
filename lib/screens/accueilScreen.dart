@@ -21,62 +21,40 @@ class AccueilScreen extends StatelessWidget {
           child: SafeArea(
             child: SingleChildScrollView(
               child: Column(
+
                 mainAxisAlignment: MainAxisAlignment.center,
 
+
                 children: <Widget>[
-                  const   SizedBox(height: 120,),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 180,
-                      width: 300,
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        children: <Widget>[
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    "images/mastercard.png",
-                                    width: 50,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.more_vert,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RichText(
-                                text: TextSpan(children: [
-                                  TextSpan(text: "REDA KHOUDRI\n"),
-                                  TextSpan(text: "**** **** **** 1298\n"),
-                                  TextSpan(
-                                      text: "VALID 09/22",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w100))
-                                ], style: TextStyle(fontSize: 22))),
+                  const SizedBox(height: 15.0),
+                  Container(
+                    height: 65,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                        border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.shade600,
+                              spreadRadius: 1,
+                              blurRadius: 15
                           )
-                        ],
+                        ]
                       ),
+
+                    child: Center(
+                      child: Text(
+                          '0,00 MAD ',
+                        style: TextStyle(
+                            fontWeight: FontWeight. bold,
+                          fontSize: 22,
+                        ),
+                      ),
+
                     ),
                   ),
+
                   Container(
                       padding: const EdgeInsets.only(
                           top: 65.0, left: 20.0, right: 20.0),

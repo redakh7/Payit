@@ -7,6 +7,7 @@ import 'package:m_wallet_hps/cubit/app_cubit.dart';
 import 'package:m_wallet_hps/cubit/app_states.dart';
 import 'package:m_wallet_hps/cubit/bloc_observer.dart';
 import 'package:m_wallet_hps/network/remote/dio_helper.dart';
+import 'package:m_wallet_hps/screens/AcccueilScreen.dart';
 import 'package:m_wallet_hps/screens/accueilScreen.dart';
 
 import 'package:m_wallet_hps/screens/home_page.dart';
@@ -71,9 +72,9 @@ class MyApp extends StatelessWidget {
             routes: {
               SignupPage.id: (context) => SignupPage(),
               LoginPage.id: (context) => const LoginPage(),
-              HomePage.id: (context) => const HomePage(),
+             // HomePage.id: (context) => const HomePage(),
               TransferPage.id: (context) => const TransferPage(),
-              AccueilScreen.id: (context) => AccueilScreen(),
+              AcccueilScreen.id: (context) => AcccueilScreen(),
             },
           ),
         ));

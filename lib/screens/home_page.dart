@@ -43,14 +43,7 @@ class HomePage extends StatelessWidget {
     ),
     child: Scaffold(
     backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          "Hello ${AppCubit. get (context).userModel?.data.firstName.toUpperCase()}!",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
+
       body: AppCubit.get(context)
           .bottomScreens[AppCubit.get(context).currentIndex],
       bottomNavigationBar: SalomonBottomBar(
@@ -62,7 +55,7 @@ class HomePage extends StatelessWidget {
           SalomonBottomBarItem(
             icon: Icon(Icons.home),
             title: Text("Home"),
-            selectedColor: Colors.purple,
+            selectedColor: Colors.green,
           ),
 
           /// Search

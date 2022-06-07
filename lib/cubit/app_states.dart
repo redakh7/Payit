@@ -42,6 +42,12 @@ class LoginSaveTokenSuccessStates extends AppStates {}
 
 
 class LoadLoggedInUserInitial extends AppStates {}
+class RemoveTokenInitialStates extends AppStates {}
+class RemoveTokenSuccessStates extends AppStates {}
+class RemoveTokenErrorStates extends AppStates {}
+
+
+
 class LoadLoggedInUserSuccess extends AppStates {}
 class LoadLoggedInUserError extends AppStates {}
 
